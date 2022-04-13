@@ -1,15 +1,18 @@
 package com.example.newsapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 const val BASE_URL="https://newsapi.org/"
 class News : AppCompatActivity() {
@@ -32,27 +35,32 @@ class News : AppCompatActivity() {
     }
 
     private fun getdata() {
+        val httpLoggingInterceptor = HttpLoggingInterceptor { message: String? ->
+        }
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val okHttpClient: OkHttpClient = OkHttpClient()
+            .newBuilder()
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
+
         val retrofitBuilder = Retrofit.Builder()
+            .client(okHttpClient)
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiInterface::class.java)
         val retrofitData = retrofitBuilder.getData()
 
-        retrofitData.enqueue(object : Callback<List<Articles>?> {
-            override fun onResponse(
-                call: Call<List<Articles>?>,
-                response: Response<List<Articles>?>
-            ) {
-                val responseBody = response.body()!!
-
-                Adapter = Adapter(baseContext,responseBody)
-                Adapter.notifyDataSetChanged()
-                recyclerview?.adapter = Adapter
+        retrofitData.enqueue(object : Callback<DataItem> {
+            override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
+             //   Adapter=  Adapter(this@News, response.body()?.articles!!)
+              //  recyclerview?.setAdapter(Adapter)
+              // Adapter.notifyDataSetChanged()
             }
 
-            override fun onFailure(call: Call<List<Articles>?>, t: Throwable) {
-                Log.d("News","onFailure: "+t.message)
+            override fun onFailure(call: Call<DataItem>, t: Throwable) {
+                TODO("Not yet implemented")
             }
         })
     }
