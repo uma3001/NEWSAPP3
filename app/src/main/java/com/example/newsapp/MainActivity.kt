@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun retrive() {
         sharedPref = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        val email = sharedPref.getString("EMAIL", "")
-        val password = sharedPref.getString("PASSWORD", "")
+        val email = sharedPref.getString("EMAIL","")
+        val password = sharedPref.getString("PASSWORD","")
 
         if(email != null && password != null) {
             val intent = Intent(this, News::class.java)

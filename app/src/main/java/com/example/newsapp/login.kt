@@ -80,11 +80,4 @@ class login : AppCompatActivity() {
             }
         }
     }
-    //override fun onStart() {
-    //    super.onStart()
-   //     if (EMAIL != null && PASSWORD != null){
-    //        val intent = Intent(this,News::class.java)
-    //        startActivity(intent)
-    //    }
-   // }
 }
