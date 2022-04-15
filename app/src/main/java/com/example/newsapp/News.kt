@@ -1,7 +1,6 @@
 package com.example.newsapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,8 +34,7 @@ class News : AppCompatActivity() {
     }
 
     private fun getdata() {
-        val httpLoggingInterceptor = HttpLoggingInterceptor { message: String? ->
-        }
+        val httpLoggingInterceptor = HttpLoggingInterceptor ()
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val okHttpClient: OkHttpClient = OkHttpClient()
@@ -54,9 +52,9 @@ class News : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
-             //   Adapter=  Adapter(this@News, response.body()?.articles!!)
-              //  recyclerview?.setAdapter(Adapter)
-              // Adapter.notifyDataSetChanged()
+                Adapter =  Adapter(this@News, response.body()?.articles!!)
+                recyclerview?.setAdapter(Adapter)
+                Adapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<DataItem>, t: Throwable) {
