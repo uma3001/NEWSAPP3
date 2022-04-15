@@ -52,6 +52,7 @@ class News : AppCompatActivity() {
 
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
+
                 Adapter =  Adapter(this@News, response.body()?.articles!!)
                 recyclerview?.setAdapter(Adapter)
                 Adapter.notifyDataSetChanged()
