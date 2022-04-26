@@ -25,4 +25,5 @@ class Adapter(val context: Context,val exampleList: List<Articles>):RecyclerView
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
     }
+    
 }

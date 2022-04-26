@@ -1,6 +1,8 @@
 package com.example.newsapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,17 +21,24 @@ class News : AppCompatActivity() {
     lateinit var Adapter: Adapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var recyclerview:RecyclerView?=null
+    var favoriteDatabase: FavoDatabase? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
+        var btnfav = findViewById<Button>(R.id.favbtn)
 
         recyclerview = findViewById(R.id.recyclerview)
         val exampleList = DummyList()
         recyclerview?.layoutManager = LinearLayoutManager(this)
         recyclerview?.setHasFixedSize(true)
 
+        btnfav.setOnClickListener {
+            val intent = Intent(this,Favourites::class.java)
+            startActivity(intent)
+        }
         getdata()
     }
 
