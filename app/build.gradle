@@ -39,6 +39,7 @@ dataBinding {
 dependencies {
 
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.room:room-common:2.3.0'
     def roomVersion = '2.3.0'
     def lifecycleVersion = '2.3.1'
     def coroutinesVersion = '1.5.0'
@@ -66,8 +67,9 @@ dependencies {
 
 
     // Room components
-    implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:2.4.2"
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"

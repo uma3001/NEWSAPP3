@@ -19,4 +19,6 @@ class Favourites : AppCompatActivity() {
         recyclerview?.setHasFixedSize(true)
 
         }
+
+
 }

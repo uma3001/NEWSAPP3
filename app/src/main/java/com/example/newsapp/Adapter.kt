@@ -22,5 +22,8 @@ class Adapter(val context: News, val exampleList: List<Articles>):RecyclerView.A
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
 
+        //add click listener for fav checkbox here and invoke callback
+        //create an interface for this callback
+
     }
 }

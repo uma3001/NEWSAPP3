@@ -3,12 +3,12 @@ package com.example.newsapp
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
 data class DataItem(
     var articles:ArrayList<Articles> = arrayListOf()
 )
 
+@Entity
 class Articles {
-    @PrimaryKey var title: String? = null
+    @PrimaryKey val title: String,
     var author: String? = null
 }

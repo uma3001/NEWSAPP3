@@ -6,13 +6,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ItemDao {
 
-    @Query("SELECT * FROM DataItem")
-    fun getall():Flow<List<DataItem>>
-
+    @Query("SELECT * FROM Articles")
+    fun getall():Flow<List<Articles>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(dataItem: DataItem)
+    suspend fun insert(dataItem: Articles)
 
     @Delete
-    suspend fun delete(dataitem: DataItem)
+    suspend fun delete(dataitem: Articles)
 }

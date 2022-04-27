@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ Items::class], version = 1)
+@Database(entities = [ Articles::class], version = 1)
 abstract class FavoDatabase: RoomDatabase() {
 
     abstract fun itemDao() : ItemDao

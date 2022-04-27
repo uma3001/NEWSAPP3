@@ -31,8 +31,10 @@ class News : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
+
         var btnfavlist = findViewById<Button>(R.id.favbtn)
-        var favcheck = findViewById<CheckBox>(R.id.checkfav)
+
+        //var favcheck = findViewById<CheckBox>(R.id.checkfav)
 
         recyclerview = findViewById(R.id.recyclerview)
         val exampleList = DummyList()
@@ -44,7 +46,7 @@ class News : AppCompatActivity() {
             startActivity(intent)
         }
 
-        favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
+        /*favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
             if (ischecked) {
                 Toast.makeText(this,"Added to favourites",Toast.LENGTH_SHORT).show()
                 addfavourites()
@@ -55,7 +57,7 @@ class News : AppCompatActivity() {
 
             }
 
-        }
+        }*/
         getdata()
 
 
@@ -90,12 +92,16 @@ class News : AppCompatActivity() {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
                 Adapter =  Adapter(this@News, response.body()?.articles!!)
+
+                //pass the interface callback to the adapter on the above code
+
                 recyclerview?.setAdapter(Adapter)
                 Adapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<DataItem>, t: Throwable) {
                 TODO("Not yet implemented")
+              
             }
         })
     }
