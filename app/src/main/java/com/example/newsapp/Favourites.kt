@@ -15,7 +15,6 @@ class Favourites : AppCompatActivity() {
         var listitem = emptyList<DataItem>()
 
         recyclerview = findViewById(R.id.recyclerview)
-        //recyclerview.adapter = Adapter(listitem)
         recyclerview?.layoutManager = LinearLayoutManager(this)
         recyclerview?.setHasFixedSize(true)
 

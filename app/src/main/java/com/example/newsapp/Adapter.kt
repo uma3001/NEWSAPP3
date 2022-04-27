@@ -1,12 +1,10 @@
 package com.example.newsapp
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsapp.databinding.RecyclerViewBinding
 
 class Adapter(val context: News, val exampleList: List<Articles>):RecyclerView.Adapter<Adapter.ViewHolder>() {
     class ViewHolder (itemView:View):RecyclerView.ViewHolder(itemView) {
@@ -23,5 +21,6 @@ class Adapter(val context: News, val exampleList: List<Articles>):RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
+
     }
 }

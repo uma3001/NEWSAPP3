@@ -5,11 +5,14 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
 class FavouritesViewModel(private val repositry: FavoRepositry):ViewModel() {
-    //val allfavo: LiveData<List<Items>> = repositry.allwords.asLiveData()
+    val allfavo: LiveData<List<DataItem>> = repositry.allfavo.asLiveData()
 
     fun insert(dataitem:DataItem) = viewModelScope.launch {
         repositry.insert(dataitem)
    }
+    fun delete(dataitem: DataItem) = viewModelScope.launch {
+        repositry.delete(dataitem)
+    }
     class FavouritesViewModelFactory(private val repositry: FavoRepositry):ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(FavouritesViewModel::class.java)) {

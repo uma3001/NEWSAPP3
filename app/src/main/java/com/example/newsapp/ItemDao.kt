@@ -1,15 +1,14 @@
 package com.example.newsapp
 
-import android.content.ClipData
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.util.concurrent.Flow
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
 
     @Query("SELECT * FROM DataItem")
-    fun getall(dataitem: DataItem):LiveData<List<DataItem>>
+    fun getall():Flow<List<DataItem>>
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(dataItem: DataItem)

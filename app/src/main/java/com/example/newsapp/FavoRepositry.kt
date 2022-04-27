@@ -1,8 +1,11 @@
 package com.example.newsapp
 
+import kotlinx.coroutines.flow.Flow
 
 
 class FavoRepositry(private val itemDao: ItemDao) {
+
+    val allfavlist: Flow<List<DataItem>> = ItemDao.getall()
 
     suspend fun insert(dataitem:DataItem){
         itemDao.insert(dataitem)
@@ -11,9 +14,6 @@ class FavoRepositry(private val itemDao: ItemDao) {
         itemDao.delete(dataitem)
     }
     fun getall(dataitem:DataItem){
-        itemDao.getall(dataitem)
+        itemDao.getall()
     }
 }
-//val currentnumber:MutableLiveData<Int> by lazy {
-//        MutableLiveData<Int>()
-//    val allWords: Flow<List<Items>> = itemDao.getAlphabetizedWords()

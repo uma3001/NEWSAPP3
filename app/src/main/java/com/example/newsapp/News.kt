@@ -3,6 +3,8 @@ package com.example.newsapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,24 +24,49 @@ class News : AppCompatActivity() {
     lateinit var linearLayoutManager: LinearLayoutManager
     var recyclerview:RecyclerView?=null
     var favoriteDatabase: FavoDatabase? = null
+   lateinit var favlistbtn: CheckBox
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-        var btnfav = findViewById<Button>(R.id.favbtn)
+        var btnfavlist = findViewById<Button>(R.id.favbtn)
+        var favcheck = findViewById<CheckBox>(R.id.checkfav)
 
         recyclerview = findViewById(R.id.recyclerview)
         val exampleList = DummyList()
         recyclerview?.layoutManager = LinearLayoutManager(this)
         recyclerview?.setHasFixedSize(true)
 
-        btnfav.setOnClickListener {
+        btnfavlist.setOnClickListener {
             val intent = Intent(this,Favourites::class.java)
             startActivity(intent)
         }
+
+        favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
+            if (ischecked) {
+                Toast.makeText(this,"Added to favourites",Toast.LENGTH_SHORT).show()
+                addfavourites()
+            }
+            else{
+                Toast.makeText(this,"Removed from favourites",Toast.LENGTH_SHORT).show()
+                removefavourites()
+
+            }
+
+        }
         getdata()
+
+
+    }
+
+    private fun removefavourites() {
+
+    }
+
+    private fun addfavourites() {
+
     }
 
     private fun getdata() {
