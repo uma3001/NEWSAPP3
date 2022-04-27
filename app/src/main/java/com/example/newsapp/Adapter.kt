@@ -8,11 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.databinding.RecyclerViewBinding
 
-class Adapter(val context: Context,val exampleList: List<Articles>):RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(val context: News, val exampleList: List<Articles>):RecyclerView.Adapter<Adapter.ViewHolder>() {
     class ViewHolder (itemView:View):RecyclerView.ViewHolder(itemView) {
         var title :TextView = itemView.findViewById(R.id.tittle)
         var author :TextView = itemView.findViewById(R.id.author)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,5 +24,4 @@ class Adapter(val context: Context,val exampleList: List<Articles>):RecyclerView
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
     }
-    
 }

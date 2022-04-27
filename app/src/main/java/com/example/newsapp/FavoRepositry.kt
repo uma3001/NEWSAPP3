@@ -1,13 +1,17 @@
 package com.example.newsapp
 
-import androidx.annotation.WorkerThread
+
 
 class FavoRepositry(private val itemDao: ItemDao) {
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(dataitem:DataItem){
         itemDao.insert(dataitem)
+    }
+    suspend fun delete(dataitem:DataItem){
+        itemDao.delete(dataitem)
+    }
+    fun getall(dataitem:DataItem){
+        itemDao.getall(dataitem)
     }
 }
 //val currentnumber:MutableLiveData<Int> by lazy {

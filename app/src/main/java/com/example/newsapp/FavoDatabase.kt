@@ -24,30 +24,11 @@ abstract class FavoDatabase: RoomDatabase() {
                     context.applicationContext,
                     FavoDatabase::class.java,
                     "Favo_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .addCallback(FavoCallback(scope))
-                    .build()
+                ).build()
                 INSTANCE = instance
                 instance
             }
         }
 
-    }
-    private class FavoCallback(
-        private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            INSTANCE?.let { database ->
-                scope.launch(Dispatchers.IO) {
-                    populateDatabase(database.itemDao())
-                }
-            }
-        }
-
-        suspend fun populateDatabase(itemDao: ItemDao) {
-            itemDao.delete()
-        }
     }
 }
