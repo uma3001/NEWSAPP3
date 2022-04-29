@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import retrofit2.Callback
 
 
 
@@ -15,6 +15,7 @@ class Adapter(val context: News, val exampleList: List<Articles>, var listener: 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.tittle)
         var author: TextView = itemView.findViewById(R.id.author)
+        var image :ImageView = itemView.findViewById(R.id.image_view)
         var favcheck: CheckBox = itemView.findViewById(R.id.checkfav)
 
     }
@@ -32,13 +33,13 @@ class Adapter(val context: News, val exampleList: List<Articles>, var listener: 
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
 
-        holder.itemView.setOnClickListener(View.OnClickListener {
+       // holder.itemView.setOnClickListener(View.OnClickListener {
 
-            listener.onItemClick(exampleList[position].title,exampleList[position].author,position)
+            //listener.onItemClick(exampleList[position].title,exampleList[position].author,position)
             holder.favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
                 if (ischecked) {
+                    listener.onItemClick(exampleList[position].title,exampleList[position].author,position)
                     //Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show()
-
 
                 } else {
                     // Toast.makeText(this, "Removed from favourites", Toast.LENGTH_SHORT).show()
@@ -47,7 +48,7 @@ class Adapter(val context: News, val exampleList: List<Articles>, var listener: 
 
             }
 
-        })
+        //})
         //CheckBox cb = (CheckBox)convertView.findViewById(R.id.check_box);
         //  if(getSelectedItemPosition() == position)
         //     cb.setChecked(true);
