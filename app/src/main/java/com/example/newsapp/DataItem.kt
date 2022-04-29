@@ -8,7 +8,8 @@ data class DataItem(
 )
 
 @Entity
-class Articles {
-    @PrimaryKey val title: String,
-    var author: String? = null
+class Articles{
+    @PrimaryKey var id : Int =1
+    var title: String =""
+    var author: String=""
 }

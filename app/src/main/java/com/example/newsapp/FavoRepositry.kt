@@ -5,15 +5,15 @@ import kotlinx.coroutines.flow.Flow
 
 class FavoRepositry(private val itemDao: ItemDao) {
 
-    val allfavlist: Flow<List<DataItem>> = itemDao.getall()
+    val allfavlist: Flow<List<Articles>> = itemDao.getall()
 
-    suspend fun insert(dataitem:DataItem){
+    suspend fun insert(dataitem:Articles){
         itemDao.insert(dataitem)
     }
-    suspend fun delete(dataitem:DataItem){
+    suspend fun delete(dataitem:Articles){
         itemDao.delete(dataitem)
     }
-    fun getall(dataitem:DataItem){
+    fun getall(dataitem:Articles){
         itemDao.getall()
     }
 }

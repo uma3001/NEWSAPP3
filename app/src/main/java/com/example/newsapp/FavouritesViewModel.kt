@@ -9,14 +9,14 @@ class FavouritesViewModel(private val repositry: FavoRepositry) : ViewModel() {
 
     }
 
-    val allfavo: LiveData<List<DataItem>> = repositry.allfavlist.asLiveData()
+    val allfavo: LiveData<List<Articles>> = repositry.allfavlist.asLiveData()
 
     fun insert(dataitem: DataItem) = viewModelScope.launch {
-        repositry.insert(dataitem)
+        repositry.insert(Articles())
     }
 
     fun delete(dataitem: DataItem) = viewModelScope.launch {
-        repositry.delete(dataitem)
+        repositry.delete(Articles())
     }
 
     class FavouritesViewModelFactory(private val repositry: FavoRepositry) :

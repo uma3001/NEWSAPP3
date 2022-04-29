@@ -2,9 +2,8 @@ package com.example.newsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,13 +17,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 const val BASE_URL="https://newsapi.org/"
-class News : AppCompatActivity() {
+class News : AppCompatActivity(),Adapter.OnItemClickListener{
 
     lateinit var Adapter: Adapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var recyclerview:RecyclerView?=null
     var favoriteDatabase: FavoDatabase? = null
-   lateinit var favlistbtn: CheckBox
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +32,6 @@ class News : AppCompatActivity() {
 
         var btnfavlist = findViewById<Button>(R.id.favbtn)
 
-        //var favcheck = findViewById<CheckBox>(R.id.checkfav)
 
         recyclerview = findViewById(R.id.recyclerview)
         val exampleList = DummyList()
@@ -46,29 +43,7 @@ class News : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
-            if (ischecked) {
-                Toast.makeText(this,"Added to favourites",Toast.LENGTH_SHORT).show()
-                addfavourites()
-            }
-            else{
-                Toast.makeText(this,"Removed from favourites",Toast.LENGTH_SHORT).show()
-                removefavourites()
-
-            }
-
-        }*/
         getdata()
-
-
-    }
-
-    private fun removefavourites() {
-
-    }
-
-    private fun addfavourites() {
-
     }
 
     private fun getdata() {
@@ -91,7 +66,7 @@ class News : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
-                Adapter =  Adapter(this@News, response.body()?.articles!!)
+                Adapter =  Adapter(this@News, response.body()?.articles!!,this@News)
 
                 //pass the interface callback to the adapter on the above code
 
@@ -115,5 +90,15 @@ class News : AppCompatActivity() {
         list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
 
         return list
+    }
+
+    override fun onItemClick(Tittle: String, Author: String, Position: Int) {
+        Log.d("TAG_TILE",Tittle.toString())
+        val bundle = Bundle()
+        bundle.putString("tittle",Tittle)
+        bundle.putString("author",Author)
+        val i = Intent(this, Favourites::class.java)
+        i.putExtras(bundle)
+        startActivity(i,bundle)
     }
 }
