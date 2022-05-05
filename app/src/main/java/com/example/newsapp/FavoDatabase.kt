@@ -1,6 +1,7 @@
 package com.example.newsapp
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -10,14 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(entities = [ Articles::class], version = 1)
-abstract class FavoDatabase: RoomDatabase() {
+abstract class FavoDatabase(): RoomDatabase() {
 
     abstract fun itemDao() : ItemDao
 
     companion object {
         @Volatile
         private var INSTANCE: FavoDatabase? = null
-        fun getDatabase(context: Context, scope: CoroutineScope):FavoDatabase
+        fun getDatabase(context: Context):FavoDatabase
         {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -29,6 +30,5 @@ abstract class FavoDatabase: RoomDatabase() {
                 instance
             }
         }
-
     }
 }

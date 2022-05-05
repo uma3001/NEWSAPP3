@@ -1,6 +1,5 @@
 package com.example.newsapp
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,22 +7,22 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.Int
+
+class Adapter(val context: News,val exampleList: List<Articles>, private var callbackinterface: Callbackinterface):RecyclerView.Adapter<Adapter.ViewHolder>() {
 
 
-
-class Adapter(val context: News, val exampleList: List<Articles>, var listener: OnItemClickListener):RecyclerView.Adapter<Adapter.ViewHolder>() {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View,callbackinterface: Callbackinterface) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.tittle)
         var author: TextView = itemView.findViewById(R.id.author)
-        var image :ImageView = itemView.findViewById(R.id.image_view)
         var favcheck: CheckBox = itemView.findViewById(R.id.checkfav)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var itemView = LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false)
 
-        return ViewHolder(itemView)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false)
+
+        return ViewHolder(itemView,callbackinterface)
     }
 
     override fun getItemCount() = exampleList.size
@@ -33,37 +32,29 @@ class Adapter(val context: News, val exampleList: List<Articles>, var listener: 
         holder.title.text = exampleList[position].title
         holder.author.text = exampleList[position].author
 
-       // holder.itemView.setOnClickListener(View.OnClickListener {
-
-            //listener.onItemClick(exampleList[position].title,exampleList[position].author,position)
             holder.favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
                 if (ischecked) {
-                    listener.onItemClick(exampleList[position].title,exampleList[position].author,position)
-                    //Toast.makeText(this, "Added to favourites", Toast.LENGTH_SHORT).show()
+                    holder.title.text = exampleList[position].title
+                    holder.author.text = exampleList[position].author
+                        callbackinterface.Passdata(Tittle = holder.title.toString(),Author = holder.author.toString())
 
                 } else {
-                    // Toast.makeText(this, "Removed from favourites", Toast.LENGTH_SHORT).show()
-
+                   // removefromfav()
                 }
-
             }
-
-        //})
-        //CheckBox cb = (CheckBox)convertView.findViewById(R.id.check_box);
-        //  if(getSelectedItemPosition() == position)
-        //     cb.setChecked(true);
-        //  else
-        //     cb.setChecked(true);
-        // }
+    }
+    /*fun addtofav() {
+        favViewModel.addfavo(dataitem = Articles(id = 1, title = "", author = ""))
 
     }
+    fun removefromfav(){
+        favViewModel.deletefavo(dataitem = Articles(id = 1, title = "", author = ""))
 
-    interface OnItemClickListener {
+    }*/
 
-        fun onItemClick(
-            Tittle:String,
-            Author:String,
-            Position:Int
-        )
+    interface Callbackinterface {
+        fun Passdata(Tittle:String,Author:String)
+
+
     }
 }

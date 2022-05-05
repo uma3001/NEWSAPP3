@@ -2,9 +2,10 @@ package com.example.newsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.OkHttpClient
@@ -17,12 +18,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 const val BASE_URL="https://newsapi.org/"
-class News : AppCompatActivity(),Adapter.OnItemClickListener{
+class News : AppCompatActivity(),Adapter.Callbackinterface{
 
     lateinit var Adapter: Adapter
     lateinit var linearLayoutManager: LinearLayoutManager
     var recyclerview:RecyclerView?=null
-    var favoriteDatabase: FavoDatabase? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class News : AppCompatActivity(),Adapter.OnItemClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        var btnfavlist = findViewById<Button>(R.id.favbtn)
+        val btnfavlist = findViewById<Button>(R.id.favbtn)
 
 
         recyclerview = findViewById(R.id.recyclerview)
@@ -39,7 +39,7 @@ class News : AppCompatActivity(),Adapter.OnItemClickListener{
         recyclerview?.setHasFixedSize(true)
 
         btnfavlist.setOnClickListener {
-            val intent = Intent(this,Favourites::class.java)
+            val intent = Intent(this,Favourites_Activity::class.java)
             startActivity(intent)
         }
 
@@ -66,9 +66,9 @@ class News : AppCompatActivity(),Adapter.OnItemClickListener{
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
-                Adapter =  Adapter(this@News, response.body()?.articles!!,this@News)
+                Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = Adapter.context)
 
-                //pass the interface callback to the adapter on the above code
+               //pass the interface callback to the adapter on the above code
 
                 recyclerview?.setAdapter(Adapter)
                 Adapter.notifyDataSetChanged()
@@ -92,13 +92,14 @@ class News : AppCompatActivity(),Adapter.OnItemClickListener{
         return list
     }
 
-    override fun onItemClick(Tittle: String, Author: String, Position: Int) {
-        Log.d("TAG_TILE",Tittle.toString())
-        val bundle = Bundle()
-        bundle.putString("tittle",Tittle)
-        bundle.putString("author",Author)
-        val i = Intent(this, Favourites::class.java)
-        i.putExtras(bundle)
-        startActivity(i,bundle)
+    override fun Passdata(Tittle: String, Author: String) {
+        val favviewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(FavouritesViewModel::class.java)
+        favviewModel.addfavo(Articles())
+        Toast.makeText(
+            this, "Saved to favourites", Toast.LENGTH_SHORT
+        ).show()
     }
 }

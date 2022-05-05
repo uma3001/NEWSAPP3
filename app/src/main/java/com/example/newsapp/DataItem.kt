@@ -8,8 +8,8 @@ data class DataItem(
 )
 
 @Entity
-class Articles{
-    @PrimaryKey var id : Int =1
-    var title: String =""
+class Articles(
+    @PrimaryKey var id : Int =1,
+    var title: String ="",
     var author: String=""
-}
+)

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsAPP">
         <activity
-            android:name=".Favourites"
+            android:name=".Favourites_Activity"
             android:exported="false" />
         <activity
             android:name=".News"
