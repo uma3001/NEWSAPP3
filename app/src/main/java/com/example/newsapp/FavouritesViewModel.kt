@@ -3,7 +3,7 @@ package com.example.newsapp
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
-class FavouritesViewModel(private val repositry: FavoRepositry) : ViewModel() {
+class FavouritesViewModel( val repositry: FavoRepositry) : ViewModel() {
 
     //val allfavo: LiveData<List<Articles>> = repositry.allfavlist.asLiveData()
 
@@ -15,7 +15,7 @@ class FavouritesViewModel(private val repositry: FavoRepositry) : ViewModel() {
         repositry.delete(Articles())
     }
 
-    class FavouritesViewModelFactory(private val repositry: FavoRepositry) :
+    class FavouritesViewModelFactory(val repositry: FavoRepositry) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FavouritesViewModel::class.java)) {
@@ -25,5 +25,4 @@ class FavouritesViewModel(private val repositry: FavoRepositry) : ViewModel() {
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
-
 }

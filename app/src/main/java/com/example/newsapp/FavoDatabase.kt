@@ -18,7 +18,7 @@ abstract class FavoDatabase(): RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: FavoDatabase? = null
-        fun getDatabase(context: Context):FavoDatabase
+        fun getDatabase(context: Context, applicationScope: CoroutineScope):FavoDatabase
         {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(

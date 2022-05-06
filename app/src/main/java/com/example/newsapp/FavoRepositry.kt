@@ -3,7 +3,7 @@ package com.example.newsapp
 import kotlinx.coroutines.flow.Flow
 
 
-class FavoRepositry(private val itemDao: ItemDao) {
+class FavoRepositry( val itemDao: ItemDao) {
 
     //val allfavlist: Flow<List<Articles>> = itemDao.getall()
 

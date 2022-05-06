@@ -3,9 +3,8 @@ package com.example.newsapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.OkHttpClient
@@ -21,14 +20,18 @@ const val BASE_URL="https://newsapi.org/"
 class News : AppCompatActivity(),Adapter.Callbackinterface{
 
     lateinit var Adapter: Adapter
-    lateinit var linearLayoutManager: LinearLayoutManager
     var recyclerview:RecyclerView?=null
-
+    private val favviewModel:FavouritesViewModel by viewModels  {
+        FavouritesViewModel.FavouritesViewModelFactory((application as MyApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
+
+       // favviewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(FavouritesViewModel::class.java)
+
 
         val btnfavlist = findViewById<Button>(R.id.favbtn)
 
@@ -66,7 +69,7 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
-                Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = Adapter.context)
+                Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = this@News)
 
                //pass the interface callback to the adapter on the above code
 
@@ -76,7 +79,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
 
             override fun onFailure(call: Call<DataItem>, t: Throwable) {
                 TODO("Not yet implemented")
-              
             }
         })
     }
@@ -93,13 +95,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
     }
 
     override fun Passdata(Tittle: String, Author: String) {
-        val favviewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(FavouritesViewModel::class.java)
         favviewModel.addfavo(Articles())
-        Toast.makeText(
-            this, "Saved to favourites", Toast.LENGTH_SHORT
-        ).show()
     }
 }

@@ -12,7 +12,7 @@ import kotlin.Int
 class Adapter(val context: News,val exampleList: List<Articles>, private var callbackinterface: Callbackinterface):RecyclerView.Adapter<Adapter.ViewHolder>() {
 
 
-    class ViewHolder(itemView: View,callbackinterface: Callbackinterface) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.tittle)
         var author: TextView = itemView.findViewById(R.id.author)
         var favcheck: CheckBox = itemView.findViewById(R.id.checkfav)
@@ -22,7 +22,7 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
 
         val itemView = LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false)
 
-        return ViewHolder(itemView,callbackinterface)
+        return ViewHolder(itemView)
     }
 
     override fun getItemCount() = exampleList.size
@@ -36,25 +36,17 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
                 if (ischecked) {
                     holder.title.text = exampleList[position].title
                     holder.author.text = exampleList[position].author
-                        callbackinterface.Passdata(Tittle = holder.title.toString(),Author = holder.author.toString())
+                    callbackinterface.Passdata(Tittle = holder.title.toString(),Author = holder.author.toString())
 
                 } else {
                    // removefromfav()
                 }
             }
     }
-    /*fun addtofav() {
-        favViewModel.addfavo(dataitem = Articles(id = 1, title = "", author = ""))
-
-    }
-    fun removefromfav(){
-        favViewModel.deletefavo(dataitem = Articles(id = 1, title = "", author = ""))
-
-    }*/
 
     interface Callbackinterface {
-        fun Passdata(Tittle:String,Author:String)
+        fun Passdata(Tittle:String,Author:String){
 
-
+        }
     }
 }
