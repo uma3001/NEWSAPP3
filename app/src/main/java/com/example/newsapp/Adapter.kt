@@ -21,10 +21,8 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val itemView = LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false)
-
         return ViewHolder(itemView)
     }
-
     override fun getItemCount() = exampleList.size
 
 

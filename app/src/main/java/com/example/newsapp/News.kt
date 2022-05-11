@@ -21,6 +21,7 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
 
     lateinit var Adapter: Adapter
     var recyclerview:RecyclerView?=null
+
     private val favviewModel:FavouritesViewModel by viewModels  {
         FavouritesViewModel.FavouritesViewModelFactory((application as MyApplication).repository)
     }
@@ -29,9 +30,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-
-       // favviewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(FavouritesViewModel::class.java)
-
 
         val btnfavlist = findViewById<Button>(R.id.favbtn)
 
@@ -70,8 +68,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
                 Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = this@News)
-
-               //pass the interface callback to the adapter on the above code
 
                 recyclerview?.setAdapter(Adapter)
                 Adapter.notifyDataSetChanged()

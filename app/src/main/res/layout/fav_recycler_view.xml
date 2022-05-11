@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="Item"
+            type="com.example.newsapp.Item" />
+
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -18,6 +23,7 @@
 
             <TextView
                 android:id="@+id/favtittle"
+                android:text="@{Item.title}"
                 android:layout_width="298dp"
                 android:layout_height="51dp"
                 android:layout_marginTop="16dp"
@@ -38,6 +44,7 @@
 
             <TextView
                 android:id="@+id/favauthor"
+                android:text="@{Item.author}"
                 android:layout_width="283dp"
                 android:layout_height="41dp"
                 android:layout_marginBottom="16dp"
@@ -53,4 +60,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

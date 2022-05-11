@@ -11,4 +11,6 @@ class MyApplication :Application(){
     private val database by lazy { FavoDatabase.getDatabase(this,applicationScope) }
     val repository by lazy { FavoRepositry(database.itemDao()) }
 
+    //val dao = FavoDatabase.getDatabase(Application()).itemDao()
+
 }

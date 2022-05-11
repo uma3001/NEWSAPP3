@@ -1,5 +1,6 @@
 package com.example.newsapp
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,6 +11,7 @@ data class DataItem(
 @Entity
 class Articles(
     @PrimaryKey var id : Int =1,
-    var title: String ="",
-    var author: String=""
+    @ColumnInfo(name = "TITTLE") var title: String ="",
+    @ColumnInfo(name = "AUTHOR")var author: String=""
 )
+

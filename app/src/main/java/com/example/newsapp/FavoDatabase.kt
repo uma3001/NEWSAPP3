@@ -13,13 +13,12 @@ import kotlinx.coroutines.launch
 @Database(entities = [ Articles::class], version = 1)
 abstract class FavoDatabase(): RoomDatabase() {
 
-    abstract fun itemDao() : ItemDao
+    abstract fun itemDao(): ItemDao
 
     companion object {
         @Volatile
         private var INSTANCE: FavoDatabase? = null
-        fun getDatabase(context: Context, applicationScope: CoroutineScope):FavoDatabase
-        {
+        fun getDatabase(context: Context, applicationScope: CoroutineScope): FavoDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
