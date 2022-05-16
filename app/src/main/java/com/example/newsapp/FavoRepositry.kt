@@ -1,13 +1,10 @@
 package com.example.newsapp
 
-import android.content.Context
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
-
 
 class FavoRepositry( val itemDao: ItemDao) {
 
-    //val allfavlist: Flow<MutableList<Articles>> = ItemDao.getdata()
+    var allfavlist: LiveData<List<Articles>> = itemDao.getdata()
 
     suspend fun insert(dataitem:Articles){
         itemDao.insert(dataitem)
@@ -15,7 +12,7 @@ class FavoRepositry( val itemDao: ItemDao) {
     suspend fun delete(dataitem:Articles){
         itemDao.delete(dataitem)
     }
-    fun getdata(){
-       itemDao.getdata()
-   }
+    //fun getdata(){
+    //   itemDao.getdata()
+   //}
 }

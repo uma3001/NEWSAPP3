@@ -14,5 +14,4 @@ interface ItemDao {
 
     @Delete
     suspend fun delete(dataitem: Articles)
-
 }

@@ -6,11 +6,9 @@ import kotlinx.coroutines.SupervisorJob
 
 class MyApplication :Application(){
 
-    private val applicationScope = CoroutineScope(SupervisorJob())
+    private var applicationScope = CoroutineScope(SupervisorJob())
 
     private val database by lazy { FavoDatabase.getDatabase(this,applicationScope) }
     val repository by lazy { FavoRepositry(database.itemDao()) }
-
-    //val dao = FavoDatabase.getDatabase(Application()).itemDao()
 
 }

@@ -2,7 +2,9 @@ package com.example.newsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,13 +29,10 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
         val btnfavlist = findViewById<Button>(R.id.favbtn)
-
-
         recyclerview = findViewById(R.id.recyclerview)
         val exampleList = DummyList()
         recyclerview?.layoutManager = LinearLayoutManager(this)
@@ -43,7 +42,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
             val intent = Intent(this,Favourites_Activity::class.java)
             startActivity(intent)
         }
-
         getdata()
     }
 
@@ -91,6 +89,7 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
     }
 
     override fun Passdata(Tittle: String, Author: String) {
-        favviewModel.addfavo(Articles())
+        favviewModel.addfavo(Articles(id = 1, title = Tittle, author = Author))
+        Toast.makeText(this, Author, Toast.LENGTH_LONG).show()
     }
 }
