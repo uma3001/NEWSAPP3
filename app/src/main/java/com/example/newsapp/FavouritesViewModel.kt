@@ -5,13 +5,13 @@ import kotlinx.coroutines.launch
 
 class FavouritesViewModel( val repositry: FavoRepositry) : ViewModel() {
 
-    var allfavo: LiveData<List<Articles>> = repositry.allfavlist
+    var allfavo: LiveData<MutableList<Articles>> = repositry.allfavlist
 
     fun addfavo(dataitem: Articles) = viewModelScope.launch {
-        repositry.insert(Articles())
+        repositry.insert(dataitem)
     }
     fun deletefavo(dataitem: Articles) = viewModelScope.launch {
-        repositry.delete(Articles())
+        repositry.delete(dataitem)
     }
     //fun showfavo(dataitem: Articles)= viewModelScope.launch {
     //    repositry.getdata()

@@ -29,7 +29,6 @@ class Favourites_Activity() : AppCompatActivity(){
 
         //favviewModel.showfavo(Articles(id = 1, title = "", author = ""))
 
-
         favviewModel.allfavo.observe(this,{Articles ->
             Favadapter.add(ArrayList(Articles))})
 

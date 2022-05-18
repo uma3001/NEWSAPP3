@@ -28,6 +28,7 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
         FavouritesViewModel.FavouritesViewModelFactory((application as MyApplication).repository)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
@@ -90,6 +91,6 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
 
     override fun Passdata(Tittle: String, Author: String) {
         favviewModel.addfavo(Articles(id = 1, title = Tittle, author = Author))
-        //Toast.makeText(this, Author, Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, Tittle, Toast.LENGTH_LONG).show()
     }
 }

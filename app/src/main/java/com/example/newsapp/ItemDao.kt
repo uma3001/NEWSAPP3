@@ -7,7 +7,7 @@ import androidx.room.*
 interface ItemDao {
 
     @Query("SELECT * FROM Articles")
-    fun getdata() : LiveData<List<Articles>>
+    fun getdata() : LiveData<MutableList<Articles>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(dataItem: Articles)

@@ -34,7 +34,7 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
 
             holder.favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
                 if (ischecked) {
-                    callbackinterface.Passdata(Tittle = holder.title.toString(),Author = holder.author.toString())
+                    callbackinterface.Passdata(Tittle = holder.title.text.toString(),Author = holder.author.text.toString())
 
                 } else {
                    // removefromfav()
@@ -43,8 +43,6 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
     }
 
     interface Callbackinterface {
-        fun Passdata(Tittle:String,Author:String){
-
-        }
+        fun Passdata(Tittle:String,Author:String)
     }
 }

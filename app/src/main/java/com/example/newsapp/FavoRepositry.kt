@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class FavoRepositry( val itemDao: ItemDao) {
 
-    var allfavlist: LiveData<List<Articles>> = itemDao.getdata()
+    var allfavlist: LiveData<MutableList<Articles>> = itemDao.getdata()
 
     suspend fun insert(dataitem:Articles){
         itemDao.insert(dataitem)
