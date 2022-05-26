@@ -12,7 +12,4 @@ class FavoRepositry( val itemDao: ItemDao) {
     suspend fun delete(dataitem:Articles){
         itemDao.delete(dataitem)
     }
-    //fun getdata(){
-    //   itemDao.getdata()
-   //}
 }

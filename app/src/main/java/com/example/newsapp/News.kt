@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 const val BASE_URL="https://newsapi.org/"
-class News : AppCompatActivity(),Adapter.Callbackinterface{
+class News : AppCompatActivity(),Adapter.Callbackinterface,Adapter.delete{
 
     lateinit var Adapter: Adapter
     var recyclerview:RecyclerView?=null
@@ -66,7 +66,7 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
         retrofitData.enqueue(object : Callback<DataItem> {
             override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
 
-                Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = this@News)
+                Adapter =  Adapter(this@News, response.body()?.articles!!, callbackinterface = this@News, interdelete = this@News)
 
                 recyclerview?.setAdapter(Adapter)
                 Adapter.notifyDataSetChanged()
@@ -85,12 +85,21 @@ class News : AppCompatActivity(),Adapter.Callbackinterface{
         list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
         list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
         list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
+        list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
+        list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
+        list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
+        list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
+        list.add(Row_items(R.drawable.ic_baseline_menu_book_24," "," "))
 
         return list
     }
 
     override fun Passdata(Tittle: String, Author: String) {
-        favviewModel.addfavo(Articles(id = 1, title = Tittle, author = Author))
-        //Toast.makeText(this, Tittle, Toast.LENGTH_LONG).show()
+        favviewModel.addfavo(Articles(title = Tittle, author = Author))
+    }
+
+    override fun Data(Tittle: String) {
+        favviewModel.deletefavo(Articles(title = Tittle))
+
     }
 }

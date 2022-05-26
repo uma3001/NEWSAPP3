@@ -1,17 +1,14 @@
 package com.example.newsapp
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.Int
 
-class Adapter(val context: News,val exampleList: List<Articles>, private var callbackinterface: Callbackinterface):RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(val context: News,val exampleList: List<Articles>, private var callbackinterface: Callbackinterface,private var interdelete:delete):RecyclerView.Adapter<Adapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,10 +34,14 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
                     callbackinterface.Passdata(Tittle = holder.title.text.toString(),Author = holder.author.text.toString())
 
                 } else {
-                   // removefromfav()
+                   interdelete.Data(Tittle = holder.title.text.toString())
                 }
             }
     }
+
+    interface delete{
+        fun Data(Tittle:String)
+        }
 
     interface Callbackinterface {
         fun Passdata(Tittle:String,Author:String)

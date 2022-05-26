@@ -4,15 +4,17 @@ package com.example.newsapp
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
 class Favourites_Activity() : AppCompatActivity(){
 
-    var recyclerview: RecyclerView?=null
+    var recyclerview: RecyclerView? = null
 
-    private val favviewModel:FavouritesViewModel by viewModels  {
+    private val favviewModel: FavouritesViewModel by viewModels {
         FavouritesViewModel.FavouritesViewModelFactory((application as MyApplication).repository)
     }
 
@@ -24,24 +26,30 @@ class Favourites_Activity() : AppCompatActivity(){
         var FavList = dummyList()
         recyclerview?.layoutManager = LinearLayoutManager(this)
         recyclerview?.setHasFixedSize(true)
-        val Favadapter = Favo_Adapter(this,ArrayList<Articles>())
+        val Favadapter = Favo_Adapter(this, ArrayList<Articles>())
         recyclerview?.adapter = Favadapter
 
-        //favviewModel.showfavo(Articles(id = 1, title = "", author = ""))
+        //favviewModel.showfavo(Articles( title = "", author = ""))
 
-        favviewModel.allfavo.observe(this,{Articles ->
-            Favadapter.add(ArrayList(Articles))})
+        favviewModel.allfavo.observe(this, { Articles ->
+            Favadapter.add(ArrayList(Articles))
+        })
 
         Favadapter?.notifyDataSetChanged()
+
+
     }
 
-     private fun dummyList(): ArrayList<Item> {
-        val list = ArrayList<Item>()
-        list.add(Item(R.drawable.ic_baseline_menu_book_24," "," "))
-        list.add(Item(R.drawable.ic_baseline_menu_book_24," ","" ))
-        list.add(Item(R.drawable.ic_baseline_menu_book_24," "," "))
-        list.add(Item(R.drawable.ic_baseline_menu_book_24," "," "))
-        list.add(Item(R.drawable.ic_baseline_menu_book_24," "," "))
+    private fun dummyList(): List<Item> {
+        var list = ArrayList<Item>()
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", ""))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
+        list.add(Item(R.drawable.ic_baseline_menu_book_24, " ", " "))
 
         return list
     }

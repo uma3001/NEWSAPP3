@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class Favo_Adapter(val context:Context,val dummyList: ArrayList<Articles>) : RecyclerView.Adapter<Favo_Adapter.FavoViewHolder>() {
+class Favo_Adapter(val context:Context,val dummyList: MutableList<Articles>) : RecyclerView.Adapter<Favo_Adapter.FavoViewHolder>() {
 
     class FavoViewHolder(itemView:View): RecyclerView.ViewHolder(itemView){
         var favtittle: TextView = itemView.findViewById(R.id.favtittle)
@@ -26,7 +26,7 @@ class Favo_Adapter(val context:Context,val dummyList: ArrayList<Articles>) : Rec
         holder.favtittle.text = dummyList[position].title
         holder.favauthor.text = dummyList[position].author
     }
-    fun add(articles: ArrayList<Articles>?) {
+    fun add(articles: MutableList<Articles>?) {
         if (articles != null) {
             dummyList.addAll(articles)
         }

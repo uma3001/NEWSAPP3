@@ -13,9 +13,6 @@ class FavouritesViewModel( val repositry: FavoRepositry) : ViewModel() {
     fun deletefavo(dataitem: Articles) = viewModelScope.launch {
         repositry.delete(dataitem)
     }
-    //fun showfavo(dataitem: Articles)= viewModelScope.launch {
-    //    repositry.getdata()
-    //}
 
     class FavouritesViewModelFactory(val repositry: FavoRepositry) :
         ViewModelProvider.Factory {
