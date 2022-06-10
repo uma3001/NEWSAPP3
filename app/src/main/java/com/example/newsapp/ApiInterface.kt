@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("v2/everything?q=tesla&from=2022-05-02&sortBy=publishedAt&apiKey=fd25b2019ab5471ca5ce2641d0d8cfae")
+    @GET("v2/everything?q=tesla&from=2022-06-09&sortBy=publishedAt&apiKey=fd25b2019ab5471ca5ce2641d0d8cfae")
     fun getData(): Call<DataItem>
 }
