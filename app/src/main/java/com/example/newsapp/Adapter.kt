@@ -30,12 +30,12 @@ class Adapter(val context: News,val exampleList: List<Articles>, private var cal
         holder.author.text = exampleList[position].author
 
             holder.favcheck.setOnCheckedChangeListener { checkbox, ischecked ->
-                if (ischecked) {
-                    callbackinterface.Passdata(Tittle = holder.title.text.toString(),Author = holder.author.text.toString())
+                //if (ischecked) {
+                //    callbackinterface.Passdata(Tittle = holder.title.text.toString(),Author = holder.author.text.toString())
 
-                } else {
-                   interdelete.Data(Tittle = holder.title.text.toString())
-                }
+               // } else {
+               //    interdelete.Data(Tittle = holder.title.text.toString())
+               // }
             }
     }
 

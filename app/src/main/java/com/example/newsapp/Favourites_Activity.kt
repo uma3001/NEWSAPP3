@@ -31,11 +31,11 @@ class Favourites_Activity() : AppCompatActivity(){
 
         //favviewModel.showfavo(Articles( title = "", author = ""))
 
-        favviewModel.allfavo.observe(this, { Articles ->
-            Favadapter.add(ArrayList(Articles))
-        })
+        //favviewModel.allfavo.observe(this, { Articles ->
+        //    Favadapter.add(ArrayList(Articles))
+       // })
 
-        Favadapter?.notifyDataSetChanged()
+       // Favadapter?.notifyDataSetChanged()
 
 
     }
